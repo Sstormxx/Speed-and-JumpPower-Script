@@ -1,0 +1,71 @@
+-- Create the ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Create the TextButton
+local textButton = Instance.new("TextButton")
+textButton.Size = UDim2.new(0, 100, 0, 30)  -- Smaller size of the button
+textButton.Position = UDim2.new(0, 10, 0, 10)  -- Position of the button (top-left corner)
+textButton.Text = "Toggle Speed"  -- Text displayed on the button
+textButton.Parent = screenGui
+
+-- Variable to track the current speed state
+local speedIsNormal = true
+local defaultSpeed = 16
+local boostedSpeed = 75
+
+-- Function to toggle WalkSpeed when the button is clicked
+local function toggleWalkSpeed()
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+
+    if speedIsNormal then
+        humanoid.WalkSpeed = boostedSpeed
+        textButton.Text = "Speed: 75"
+    else
+        humanoid.WalkSpeed = defaultSpeed
+        textButton.Text = "Speed: 16"
+    end
+
+    speedIsNormal = not speedIsNormal
+end
+
+-- Connect the function to the button click event
+textButton.MouseButton1Click:Connect(toggleWalkSpeed)
+
+-- Create the ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Create the TextButton
+local textButton = Instance.new("TextButton")
+textButton.Size = UDim2.new(0, 100, 0, 30)  -- Smaller size of the button
+textButton.Position = UDim2.new(0, 10, 0, 50)  -- Position of the button (top-left corner, below previous button)
+textButton.Text = "Toggle Jump"  -- Text displayed on the button
+textButton.Parent = screenGui
+
+-- Variable to track the current jump power state
+local jumpIsNormal = true
+local defaultJumpPower = 50  -- Default jump power in Roblox
+local boostedJumpPower = 115  -- Boosted jump power
+
+-- Function to toggle JumpPower when the button is clicked
+local function toggleJumpPower()
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+
+    if jumpIsNormal then
+        humanoid.JumpPower = boostedJumpPower
+        textButton.Text = "Jump: 115"
+    else
+        humanoid.JumpPower = defaultJumpPower
+        textButton.Text = "Jump: 50"
+    end
+
+    jumpIsNormal = not jumpIsNormal
+end
+
+-- Connect the function to the button click event
+textButton.MouseButton1Click:Connect(toggleJumpPower)
